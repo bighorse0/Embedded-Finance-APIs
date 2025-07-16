@@ -1,0 +1,132 @@
+groups:
+  - name: embedded-finance-alerts
+    rules:
+      # High CPU Usage
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage on {{ $labels.instance }}"
+          description: "CPU usage is above 80% for more than 5 minutes"
+
+      # High Memory Usage
+      - alert: HighMemoryUsage
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage on {{ $labels.instance }}"
+          description: "Memory usage is above 85% for more than 5 minutes"
+
+      # High Response Time
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le, job)) > 1
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High response time for {{ $labels.job }}"
+          description: "95th percentile response time is above 1 second"
+
+      # High Error Rate
+      - alert: HighErrorRate
+        expr: sum(rate(http_requests_total{status=~"5.."}[5m])) by (job) / sum(rate(http_requests_total[5m])) by (job) * 100 > 5
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High error rate for {{ $labels.job }}"
+          description: "Error rate is above 5% for more than 2 minutes"
+
+      # Service Down
+      - alert: ServiceDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Service {{ $labels.job }} is down"
+          description: "Service {{ $labels.job }} has been down for more than 1 minute"
+
+      # Database Connection Issues
+      - alert: DatabaseConnectionIssues
+        expr: pg_up == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Database connection issues"
+          description: "PostgreSQL database is not responding"
+
+      # Redis Connection Issues
+      - alert: RedisConnectionIssues
+        expr: redis_up == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Redis connection issues"
+          description: "Redis is not responding"
+
+      # RabbitMQ Connection Issues
+      - alert: RabbitMQConnectionIssues
+        expr: rabbitmq_up == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "RabbitMQ connection issues"
+          description: "RabbitMQ is not responding"
+
+      # High Fraud Detection Latency
+      - alert: HighFraudDetectionLatency
+        expr: histogram_quantile(0.95, sum(rate(fraud_detection_duration_seconds_bucket[5m])) by (le)) > 0.1
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High fraud detection latency"
+          description: "95th percentile fraud detection latency is above 100ms"
+
+      # High Transaction Volume
+      - alert: HighTransactionVolume
+        expr: sum(rate(transactions_total[5m])) by (job) > 1000
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High transaction volume"
+          description: "Transaction rate is above 1000 per minute"
+
+      # Low Account Balance
+      - alert: LowAccountBalance
+        expr: account_balance < 100
+        for: 1h
+        labels:
+          severity: info
+        annotations:
+          summary: "Low account balance for {{ $labels.account_id }}"
+          description: "Account balance is below $100"
+
+      # Suspicious Activity
+      - alert: SuspiciousActivity
+        expr: fraud_score > 0.8
+        for: 0s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Suspicious activity detected"
+          description: "High fraud score detected for transaction {{ $labels.transaction_id }}"
+
+      # Compliance Violation
+      - alert: ComplianceViolation
+        expr: compliance_violations_total > 0
+        for: 0s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Compliance violation detected"
+          description: "Compliance violation detected - immediate attention required" 

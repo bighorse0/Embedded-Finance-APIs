@@ -1,0 +1,59 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "rules/*.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'apigateway'
+    static_configs:
+      - targets: ['apigateway:5000']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  - job_name: 'corebanking'
+    static_configs:
+      - targets: ['corebanking:5001']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  - job_name: 'compliance'
+    static_configs:
+      - targets: ['compliance:5002']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  - job_name: 'frauddetection'
+    static_configs:
+      - targets: ['frauddetection:5003']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres:5432']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  - job_name: 'rabbitmq'
+    static_configs:
+      - targets: ['rabbitmq:15672']
+    metrics_path: '/metrics'
+    scrape_interval: 30s 
