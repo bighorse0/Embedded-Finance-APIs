@@ -2,8 +2,6 @@
 
 A comprehensive banking-grade embedded finance API platform built with .NET 8, featuring core banking, payments, compliance, fraud detection, and security capabilities.
 
-## 🏗️ Architecture
-
 ### Microservices
 - **CoreBanking**: Account management, transactions, and core banking operations
 - **Compliance**: KYC/AML automation, regulatory reporting, and risk management
@@ -21,8 +19,6 @@ A comprehensive banking-grade embedded finance API platform built with .NET 8, f
 - **Ocelot** for API gateway
 - **Docker & Kubernetes** for containerization
 - **Prometheus & Grafana** for monitoring
-
-## 🚀 Quick Start
 
 ### Prerequisites
 - .NET 8 SDK
@@ -75,7 +71,7 @@ A comprehensive banking-grade embedded finance API platform built with .NET 8, f
    - API Gateway: http://localhost:5000
    - RabbitMQ Management: http://localhost:15672
 
-## 🔐 Security Features
+Security Features
 
 ### Authentication & Authorization
 - JWT-based authentication
@@ -95,7 +91,7 @@ A comprehensive banking-grade embedded finance API platform built with .NET 8, f
 - KYC/AML automation
 - Regulatory reporting (CTR, SAR)
 
-## 🧠 Fraud Detection
+## Fraud Detection
 
 ### Real-time Scoring
 - Sub-100ms transaction scoring
@@ -111,7 +107,7 @@ A comprehensive banking-grade embedded finance API platform built with .NET 8, f
 - Known fraud pattern matching
 - Adaptive learning from feedback
 
-## 📊 Monitoring & Observability
+## Monitoring & Observability
 
 ### Metrics
 - Application performance metrics
@@ -130,7 +126,7 @@ A comprehensive banking-grade embedded finance API platform built with .NET 8, f
 - Business intelligence dashboards
 - Security monitoring dashboards
 
-## 🧪 Testing
+## Testing
 
 ### Unit Tests
 ```bash
@@ -147,7 +143,7 @@ dotnet test tests/IntegrationTests/
 dotnet test tests/LoadTests/
 ```
 
-## 📚 API Documentation
+## API Documentation
 
 ### Authentication
 ```bash
@@ -245,7 +241,7 @@ Authorization: Bearer <jwt-token>
 }
 ```
 
-## 🏗️ Infrastructure
+## Infrastructure
 
 ### Kubernetes Deployment
 ```bash
@@ -274,7 +270,7 @@ kubectl apply -f monitoring/prometheus.yml
 kubectl apply -f monitoring/grafana.yml
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 - `ConnectionStrings__Postgres`: PostgreSQL connection string
@@ -290,7 +286,7 @@ kubectl apply -f monitoring/grafana.yml
 - `FraudDetection:RealTimeScoring:LatencyThresholdMs`: Fraud detection latency threshold
 - `Gateway:RateLimiting:DefaultLimit`: API rate limiting
 
-## 📈 Performance
+## Performance
 
 ### Benchmarks
 - **Transaction Processing**: 10,000+ TPS
@@ -304,7 +300,7 @@ kubectl apply -f monitoring/grafana.yml
 - Load balancing across multiple instances
 - Database connection pooling
 
-## 🔒 Compliance
+## Compliance
 
 ### Regulatory Standards
 - PCI DSS Level 1
@@ -317,32 +313,3 @@ kubectl apply -f monitoring/grafana.yml
 - User activity tracking
 - System access logs
 - Compliance reporting
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🆘 Support
-
-For support and questions:
-- Create an issue in the repository
-- Contact the development team
-- Check the documentation
-
-## 🔄 Roadmap
-
-- [ ] Advanced ML models for fraud detection
-- [ ] Real-time payment processing
-- [ ] Multi-currency support
-- [ ] Advanced compliance automation
-- [ ] Mobile SDK
-- [ ] Webhook support
-- [ ] Advanced analytics dashboard 
